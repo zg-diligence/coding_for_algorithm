@@ -31,11 +31,11 @@
 
 using namespace std;
 
-/*
+/**
  * swap two elements in the array
- * param i: pos of the first element
- * param j: pos of the second element
- * param arr: reference of the original vector
+ * @param i: pos of the first element
+ * @param j: pos of the second element
+ * @param arr: reference of the original vector
  * return: none
  */
 void swap(int i, int j, vector<int> &arr) {
@@ -44,13 +44,13 @@ void swap(int i, int j, vector<int> &arr) {
     arr[j] = tmp;
 }
 
-/*
+/**
  * bubble sort(stable):
  *   optimize the algorithm by recording the last exchanged position
  *   elements above the last exchange position must be ordered
  *   time complexity: O(n^2)
  *   space complexity: O(1)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return: none
  */
 void bubble_sort(vector<int> &arr) {
@@ -67,15 +67,15 @@ void bubble_sort(vector<int> &arr) {
     }
 }
 
-/*
+/**
  * quick sort(not stable):
  *  optimization_1: use insert sort when number of the elements is small
  *  optimization_2: choose median of the three elements as pivot
  *  note: consider the situation that all elements were divided into a single part
  *  time complexity: average-O(nlogn), worst-O(n^2)
  *  space complexity: O(logn) - space for recursive operation
- * param i: pos of the left-most element
- * param j: pos of the right-most element
+ * @param i: pos of the left-most element
+ * @param j: pos of the right-most element
  * return: none
  */
 void quick_sort_child(int i, int j, vector<int> &arr) {
@@ -120,12 +120,12 @@ void quick_sort(vector<int> &arr) {
     quick_sort_child(0, arr.size() - 1, arr);
 }
 
-/*
+/**
  * insert sort(stable):
  *  optimize the algorithm by using binary search to find the position to insert element
  *  time complexity: average - O(nlogn) -- the original version is O(n^2), worst - O(n^2)
  *  space complexity: O(1)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return: none
  */
 void insert_sort(vector<int> &arr) {
@@ -150,11 +150,11 @@ void insert_sort(vector<int> &arr) {
         }
 }
 
-/*
+/**
  * shell_sort(not stable):
  *  time complexity: O(nlogn) - O(n^2)
  *  space complexity: O(1)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return: none
  */
 void shell_sort(vector<int> &arr) {
@@ -170,11 +170,11 @@ void shell_sort(vector<int> &arr) {
     }
 }
 
-/*
+/**
  * selection sort:
  *  time complexity: O(n^2)
  *  space complexity: O(1)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return: none
  */
 void selection_sort(vector<int> &arr) {
@@ -194,12 +194,12 @@ void selection_sort(vector<int> &arr) {
     }
 }
 
-/*
+/**
  * heap sort(not stable):
  *  build max-heap to swap the head and tail elements until all elements be ordered
  *  time complexity: O(nlogn)
  *  space complexity: O(n) -- operating on the original vector can be O(1)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return none
  */
 void push_down(int pos, int sz, vector<int> &arr) {
@@ -237,20 +237,20 @@ void heap_sort(vector<int> &arr) {
         arr[i - 1] = heap[i];
 }
 
-/*
+/**
  * merge sort(stable):
  *  from bottm to the up, not recursively
  * time complexity: O(nlogn)
  * space complexity: O(n)
  */
 
-/*
+/**
  * merge two ordered squences
- * param start: left-most subscript of the first sequence
- * param mid: right-most subscript of the first sequence
- * param end: right-most subscript of the second sequence
- * param arr_A: reference of the original vector
- * param arr_B: merge two sequence into this vector
+ * @param start: left-most subscript of the first sequence
+ * @param mid: right-most subscript of the first sequence
+ * @param end: right-most subscript of the second sequence
+ * @param arr_A: reference of the original vector
+ * @param arr_B: merge two sequence into this vector
  * return: none
  */
 void merge(int start, int mid, int end, vector<int> &arr_A, vector<int> &arr_B) {
@@ -263,11 +263,11 @@ void merge(int start, int mid, int end, vector<int> &arr_A, vector<int> &arr_B) 
         arr_B[k++] = arr_A[j++];
 }
 
-/*
+/**
  * merge every two h-length sequences in the original vector
- * param h: expected length of each sequence
- * param arr_A: reference of the original vector
- * param arr_B: tmp container to save the merged sequence
+ * @param h: expected length of each sequence
+ * @param arr_A: reference of the original vector
+ * @param arr_B: tmp container to save the merged sequence
  * return: none
  */
 void merge_pass(int h, vector<int> &arr_A, vector<int> &arr_B) {
@@ -292,19 +292,19 @@ void merge_sort_nrc(vector<int> &arr) {
     }
 }
 
-/*
+/**
  * merge sort:
  *  from top to the bottm, recursively
  *  time complexity: O(nlogn)
  *  space complexity: O(n)
  */
 
-/*
+/**
  * split sequence and merge them recursively
- * param low: left-most subscript of the total sequence
- * param high: right-most subscript of the total sequence
- * param arr_A: reference of the original vector
- * param arr_B: tmp vector to help merge sequence
+ * @param low: left-most subscript of the total sequence
+ * @param high: right-most subscript of the total sequence
+ * @param arr_A: reference of the original vector
+ * @param arr_B: tmp vector to help merge sequence
  * return: none
  */
 void merge_sort_child(int low, int high, vector<int> &arr_A, vector<int> &arr_B) {
@@ -323,11 +323,11 @@ void merge_sort_rc(vector<int> &arr) {
     merge_sort_child(0, arr.size() - 1, arr, dev);
 }
 
-/*
+/**
  * counting sort(stable):
  *  time complexity: O(k + n)
  *  space complexity: O(k + n)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return: none
  */
 void counting_sort(vector<int> &arr) {
@@ -355,16 +355,16 @@ void counting_sort(vector<int> &arr) {
         arr[i] = dev[i + 1];
 }
 
-/*
+/**
  * radix sort(stable):
  *  time complexity: O(d*(n+r))
  *  space complexity: O(n+r)
  */
 
-/*
+/**
  * extract value at given postion
- * param value: the element
- * param pos: position of the value to extract
+ * @param value: the element
+ * @param pos: position of the value to extract
  * return: none
  */
 int radix(int value, int pos) {
@@ -372,11 +372,11 @@ int radix(int value, int pos) {
     return value / power % 10;
 }
 
-/*
+/**
  * radix sort:
  *  using buckect allocation as the stable sort algorithm
- * param arr: reference of the original vector
- * param width: max bit width of all elements
+ * @param arr: reference of the original vector
+ * @param width: max bit width of all elements
  * return: none
  */
 void radix_sort_child_1(vector<int> &arr, int width) {
@@ -413,11 +413,11 @@ void radix_sort_1(vector<int> &arr) {
     radix_sort_child_1(arr, 2);
 }
 
-/*
+/**
  * radix sort:
  *  using counting sort as the stable sort algorithm
- * param arr: reference of the original vector
- * param width: max bit width of all elements
+ * @param arr: reference of the original vector
+ * @param width: max bit width of all elements
  * return: none
  */
 void radix_sort_child_2(vector<int> &arr, int width) {
@@ -456,11 +456,11 @@ void radix_sort_2(vector<int> &arr) {
     radix_sort_child_2(arr, 2);
 }
 
-/*
+/**
  * bucket sort(stable):
  *  time complexity: O(n)
  *  space complexity: O(n)
- * param arr: reference of the original vector
+ * @param arr: reference of the original vector
  * return: none
  */
 void bucket_sort(vector<int> &arr) {
@@ -480,9 +480,9 @@ void bucket_sort(vector<int> &arr) {
             arr.push_back(elem);
 }
 
-/*
+/**
  * test function for sorting alforithms
- * param sort: pointer of the sort function
+ * @param sort: pointer of the sort function
  */
 using TF = void(vector<int> &);
 
