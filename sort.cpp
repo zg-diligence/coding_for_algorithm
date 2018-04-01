@@ -3,7 +3,7 @@
  *  All rights reserved.
  *  Author: Gang Zhang
  *  Creation date: 2018.3.31
- *  Last modified: 2018.3.31
+ *  Last modified: 2018.4.1
  *
  *  Function:
  *      Sorting Algorithms
