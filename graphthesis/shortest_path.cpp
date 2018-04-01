@@ -82,17 +82,15 @@ void print_path(int src = 0) {
  * @param v: end vertex
  * return: none
  */
-void PrintFloyd(const GraphMatrix &dist, int u, int v){
+void PrintFloyd(const GraphMatrix &dist, int u, int v) {
     if (u == v)
         cout << u << "->" << v << ":itself" << endl;
     else if (dist[u][v] == INFINITY)
         cout << u << "->" << v << ":infinity" << endl;
-    else
-    {
+    else {
         cout << u << "->" << v << "(" << dist[u][v] << "):";
         int cur = u;
-        while (nextV[cur][v] != v)
-        {
+        while (nextV[cur][v] != v) {
             cout << cur << " ";
             cur = nextV[cur][v];
         }
@@ -218,28 +216,27 @@ bool Dijkstra(const GraphList &graph, int src = 0) {
  *     a matrix including distance between any two vertices,
  *     if there is a nagative weighted circuit, return empty matrix.
  */
-GraphMatrix Floyd_Warshall(const GraphMatrix &graph){
+GraphMatrix Floyd_Warshall(const GraphMatrix &graph) {
     size_t size = graph.size();
 
     //init auxiliary arrays
     GraphMatrix dist = graph;
     nextV.resize(size, vector<int>(size, NIL));
-    for(int i=0; i != size; ++i)
-        for(int j=0; j != size; ++j)
-            if(graph[i][j] != INFINITY)
+    for (int i = 0; i != size; ++i)
+        for (int j = 0; j != size; ++j)
+            if (graph[i][j] != INFINITY)
                 nextV[i][j] = j;
 
-    for(int k=0; k != size; ++k)
-        for(int i=0; i != size; ++i)
-            for(int j=0; j != size; ++j)
-                if(dist[i][k] + dist[k][j] < dist[i][j])
-                {
-                    if(dist[i][k] == INFINITY || dist[k][j] == INFINITY) //check unreachable edge
+    for (int k = 0; k != size; ++k)
+        for (int i = 0; i != size; ++i)
+            for (int j = 0; j != size; ++j)
+                if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                    if (dist[i][k] == INFINITY || dist[k][j] == INFINITY) //check unreachable edge
                         continue;
 
                     dist[i][j] = dist[i][k] + dist[k][j];
                     nextV[i][j] = nextV[i][k];
-                    if(i == j && dist[i][j] < 0) //check negative circuit
+                    if (i == j && dist[i][j] < 0) //check negative circuit
                         return GraphMatrix();
                 }
     return dist;
@@ -251,7 +248,7 @@ GraphMatrix Floyd_Warshall(const GraphMatrix &graph){
  * @param src: source vertex of the graph
  * return: none
  */
-void test_for_dijkstra(const GraphList &graph, int src){
+void test_for_dijkstra(const GraphList &graph, int src) {
     size_t size = graph.size();
 
     preV = vector<int>(size, NIL);
@@ -273,10 +270,8 @@ void test_for_floyd(const GraphMatrix &graph) {
     auto dist1 = Floyd_Warshall(graph);
     if (dist1.empty())
         cout << "There is a negative-weight circuit." << endl;
-    else
-    {
-        for (int m = 0; m != size; ++m)
-        {
+    else {
+        for (int m = 0; m != size; ++m) {
             for (int n = 0; n != size; ++n)
                 if (dist1[m][n] == INFINITY)
                     cout << "N\t";
@@ -296,21 +291,21 @@ int main() {
     unsigned num, u, v, w;
     cout << "请输入顶点数:";
     cin >> num;
-    
+
     GraphList graph1(num);
     GraphMatrix graph2(num, vector<int>(num, INFINITY));
-    for(int i=0; i != num; ++i)
+    for (int i = 0; i != num; ++i)
         graph2[i][i] = 0;
 
     cout << "请依次输入有向图的边,以0 0 0结束:" << endl;
-    while (cin >> u >> v >> w && !(u == 0 && v == 0))
-    {
+    while (cin >> u >> v >> w && !(u == 0 && v == 0)) {
         graph1[u].emplace_back(v, w);
         graph2[u][v] = w;
     }
 
     cout << "输入源点:";
-    int src; cin >> src;
+    int src;
+    cin >> src;
 
     test_for_dijkstra(graph1, src);
     test_for_floyd(graph2);
