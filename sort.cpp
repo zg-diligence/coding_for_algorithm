@@ -35,7 +35,7 @@ using namespace std;
  * swap two elements in the array
  * param i: pos of the first element
  * param j: pos of the second element
- * param arr: reference of the vector
+ * param arr: reference of the original vector
  * return: none
  */
 void swap(int i, int j, vector<int> &arr) {
@@ -50,7 +50,7 @@ void swap(int i, int j, vector<int> &arr) {
  *   elements above the last exchange position must be ordered
  *   time complexity: O(n^2)
  *   space complexity: O(1)
- * param arr: reference of the vector
+ * param arr: reference of the original vector
  * return: none
  */
 void bubble_sort(vector<int> &arr) {
@@ -70,7 +70,7 @@ void bubble_sort(vector<int> &arr) {
 /*
  * quick sort(not stable):
  *  optimization_1: use insert sort when number of the elements is small
- *  optimization_2: choose median the three elements as pivot
+ *  optimization_2: choose median of the three elements as pivot
  *  note: consider the situation that all elements were divided into a single part
  *  time complexity: average-O(nlogn), worst-O(n^2)
  *  space complexity: O(logn) - space for recursive operation
@@ -125,8 +125,8 @@ void quick_sort(vector<int> &arr) {
  *  optimize the algorithm by using binary search to find the position to insert element
  *  time complexity: average - O(nlogn) -- the original version is O(n^2), worst - O(n^2)
  *  space complexity: O(1)
- *  param arr: reference of the vector
- *  return: none
+ * param arr: reference of the original vector
+ * return: none
  */
 void insert_sort(vector<int> &arr) {
     int sz = arr.size();
@@ -154,8 +154,8 @@ void insert_sort(vector<int> &arr) {
  * shell_sort(not stable):
  *  time complexity: O(nlogn) - O(n^2)
  *  space complexity: O(1)
- *  param arr: reference of the vector
- *  return: none
+ * param arr: reference of the original vector
+ * return: none
  */
 void shell_sort(vector<int> &arr) {
     int sz = arr.size();
@@ -174,8 +174,8 @@ void shell_sort(vector<int> &arr) {
  * selection sort:
  *  time complexity: O(n^2)
  *  space complexity: O(1)
- *  param arr: reference of the vector
- *  return: none
+ * param arr: reference of the original vector
+ * return: none
  */
 void selection_sort(vector<int> &arr) {
     int sz = arr.size();
@@ -199,8 +199,8 @@ void selection_sort(vector<int> &arr) {
  *  build max-heap to swap the head and tail elements until all elements be ordered
  *  time complexity: O(nlogn)
  *  space complexity: O(n) -- operating on the original vector can be O(1)
- *  param arr: reference of the vector
- *  return none
+ * param arr: reference of the original vector
+ * return none
  */
 void push_down(int pos, int sz, vector<int> &arr) {
     int tmp = arr[pos];
@@ -327,8 +327,8 @@ void merge_sort_rc(vector<int> &arr) {
  * counting sort(stable):
  *  time complexity: O(k + n)
  *  space complexity: O(k + n)
- *  param arr: reference of the vector
- *  return: none
+ * param arr: reference of the original vector
+ * return: none
  */
 void counting_sort(vector<int> &arr) {
     if (arr.empty()) return;
@@ -359,7 +359,6 @@ void counting_sort(vector<int> &arr) {
  * radix sort(stable):
  *  time complexity: O(d*(n+r))
  *  space complexity: O(n+r)
- *  return: none
  */
 
 /*
@@ -376,9 +375,9 @@ int radix(int value, int pos) {
 /*
  * radix sort:
  *  using buckect allocation as the stable sort algorithm
- *  param arr: reference of the original vector
- *  param width: max bit width of all elements
- *  return: none
+ * param arr: reference of the original vector
+ * param width: max bit width of all elements
+ * return: none
  */
 void radix_sort_child_1(vector<int> &arr, int width) {
     queue<int> A;
@@ -417,9 +416,9 @@ void radix_sort_1(vector<int> &arr) {
 /*
  * radix sort:
  *  using counting sort as the stable sort algorithm
- *  param arr: reference of the original vector
- *  param width: max bit width of all elements
- *  return: none
+ * param arr: reference of the original vector
+ * param width: max bit width of all elements
+ * return: none
  */
 void radix_sort_child_2(vector<int> &arr, int width) {
     if (arr.empty()) return;
@@ -445,7 +444,7 @@ void radix_sort_child_2(vector<int> &arr, int width) {
         for (int i = 1; i <= max; ++i)
             count[i] += count[i - 1];
 
-        //copy elements to correct position
+        //copy elements to the correct position
         for (int i = sz - 1; i >= 0; --i)
             dev[count[comp[i]]--] = arr[i];
         for (int i = 0; i != sz; ++i)
@@ -461,8 +460,8 @@ void radix_sort_2(vector<int> &arr) {
  * bucket sort(stable):
  *  time complexity: O(n)
  *  space complexity: O(n)
- *  param arr: reference of the original vector
- *  return: none
+ * param arr: reference of the original vector
+ * return: none
  */
 void bucket_sort(vector<int> &arr) {
     //allocate elements into buckets by certain rule
