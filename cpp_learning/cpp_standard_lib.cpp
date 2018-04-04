@@ -3,7 +3,7 @@
  *  All rights reserved.
  *  Author: Gang Zhang
  *  Creation date: 2018.3.30
- *  Last modified: 2018.4.3
+ *  Last modified: 2018.4.4
  *
  *  Function:
  *      Advanced knowledge
@@ -32,6 +32,11 @@
 #include <iterator>
 #include <algorithm>
 #include <functional>
+
+#include <new>
+#include <memory>
+
+#include "StrBlob.h"
 
 using namespace std;
 using namespace std::placeholders;
@@ -99,6 +104,29 @@ void print_seq(const T &seq, const char *sep = " ", const string &end = "\n") {
  * 11.特定容器的算法 list and forward_list
  *   优先使用成员函数版本的算法,通用版本性能低很多
  *   链表特有的操作会改变容器,通用版本算法不会改变容器
+ *
+ * 动态内存 ------------------------------------------------------------------------------------------------
+ * 12.内存分配
+ *   静态内存: 局部static变量|类static变量|全局变量
+ *   栈内存: 定义在函数内的局部非static变量
+ *   堆内存: 存储程序动态分配的对象
+ *   静态内存|栈内存由编译器自动创建和销毁, 堆内存的生存期由程序控制
+ *
+ * 13.new|delete
+ *   new (nothrow) int; //如果分配失败,返回一个空指针,而不是抛出bad_alloc
+ *   delete nullptr总是正确的
+ *
+ * 14.shared_ptr|unique_ptr|weak_ptr
+ *   将一个shared_ptr绑定到一个普通指针时,我们就将内存的管理责任交给了这个shared_ptr,一旦完成就不应该再使用普通指针
+ *   智能指针所在程序块发生异常, 动态内存会被正确释放,而普通指针则不能
+ *
+ * 15.动态数组
+ *   动态数组并不是数组类型,仅仅返回首元素指针,因此不能对动态数组调用begin,end,同样也不能使用范围for语句来处理动态数组中的元素
+ *   new int[0]是合法的, 动态数组的释放是逆序的,即从最后一个元素开始
+ *   可使用unique_ptr管理动态数组
+ *
+ * 16.allocator
+ *   将内存分配和对象构造分开,使得我们可以在真正需要时才执行对象创建操作
  */
 
 /**
@@ -145,6 +173,11 @@ int main(){
 //    elim_dups(words);
     biggies(words, 5);
     print_seq(words);
+
+    //use of map
+    map<int, int> mp{{1,2},{2,3},{3,4}};
+    for(auto item: mp)
+        cout << item.first << " " << item.second << endl;
 
     return 0;
 }

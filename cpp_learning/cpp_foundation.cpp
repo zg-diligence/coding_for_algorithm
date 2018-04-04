@@ -3,10 +3,10 @@
  *  All rights reserved.
  *  Author: Gang Zhang
  *  Creation date: 2018.3.28
- *  Last modified: 2018.3.30
+ *  Last modified: 2018.4.4
  *
  *  Function:
- *     C++ Basic Knowledge
+ *     C++ foundation
  */
 
 #include <iostream>
