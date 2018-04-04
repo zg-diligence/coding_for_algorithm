@@ -6,13 +6,14 @@
  *  Last modified: 2018.4.4
  *
  *  Function:
- *      Advanced knowledge
+ *      C++ standard library
  */
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
+#include <cmath>
 #include <list>
 #include <array>
 #include <deque>
@@ -71,7 +72,7 @@ void print_seq(const T &seq, const char *sep = " ", const string &end = "\n") {
  *   可利用hash模板和自定义==运算符自定义无序容器,C++ Primer P396
  *   无论在有序容器还是无序容器中,具有相同关键字的元素都是相邻存储的
  *
- * 泛型算法 ------------------------------------------------------------------------------------------------
+ * 泛型算法 -------------------------------------------------------------------------------------------------------
  * 7.泛型算法
  *   算法不会改变容器的大小
  *   find|count|accumulate|equal|find_if|count_if
@@ -105,7 +106,7 @@ void print_seq(const T &seq, const char *sep = " ", const string &end = "\n") {
  *   优先使用成员函数版本的算法,通用版本性能低很多
  *   链表特有的操作会改变容器,通用版本算法不会改变容器
  *
- * 动态内存 ------------------------------------------------------------------------------------------------
+ * 动态内存 -------------------------------------------------------------------------------------------------------
  * 12.内存分配
  *   静态内存: 局部static变量|类static变量|全局变量
  *   栈内存: 定义在函数内的局部非static变量
@@ -127,6 +128,16 @@ void print_seq(const T &seq, const char *sep = " ", const string &end = "\n") {
  *
  * 16.allocator
  *   将内存分配和对象构造分开,使得我们可以在真正需要时才执行对象创建操作
+ *
+ * IO库 -----------------------------------------------------------------------------------------------------------
+ * 17.IO对象无拷贝或赋值,函数传参或返回均以非常量引用方式进行,因为读写一个IO对象会改变其状态,因此传递和返回的引用不能是const的
+ *
+ * 18.缓冲区刷新 flush|ends|endl
+ *   程序正常结束|缓冲区满|操纵符endl|流关联
+ *
+ * 19.ofstream 默认out|trunc, 文件内容被丢弃, 为了保留文件内容, 应指定为out|app或out|in模式
+ *
+ * 20.操作符改变格式状态:控制数值的输出形式 or 控制补白的数量和位置
  */
 
 /**
@@ -166,18 +177,25 @@ int main(){
     replace(nums.begin(), nums.end(), 4, 8);
     replace_copy(nums.begin(), nums.end(), back_inserter(new_nums), 4, 8);
 
-    //use of istream_iterator
+    /*use of istream_iterator*/
     istringstream str_cin("the quick red fox jumps over the slow red turtle");
     istream_iterator<string> is(str_cin), eof;
     vector<string> words(is, eof);
-//    elim_dups(words);
+    //elim_dups(words);
     biggies(words, 5);
     print_seq(words);
 
-    //use of map
+    /*use of map*/
     map<int, int> mp{{1,2},{2,3},{3,4}};
     for(auto item: mp)
         cout << item.first << " " << item.second << endl;
+
+    /*use of ostringstream*/
+    ostringstream sout("we are here!");
+    for(int i=0; i != 1000000; ++i)
+        sout << " " << "we are here!";
+    string s = sout.str();
+    cout << s.size() << endl;
 
     return 0;
 }
